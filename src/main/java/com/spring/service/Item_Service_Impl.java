@@ -3,6 +3,7 @@ package com.spring.service;
 import com.spring.entity.Item;
 import com.spring.exception.Item_NotFound_Exception;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,9 +14,15 @@ public class Item_Service_Impl implements Item_Service {
     private Item_Repository item_repository;
 
     @Override
-    public Iterable<Item> listItems() {
-        return this.item_repository.findAll();
+    public Item createItem(Item item) {
+        return item_repository.save(item);
     }
+
+    @Override
+    public Iterable<Item> listItems(Pageable pageable) {
+        return this.item_repository.findAll(pageable);
+    }
+
 
     @Override
     public Item getItem(long id) {

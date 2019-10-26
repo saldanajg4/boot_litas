@@ -4,13 +4,19 @@ import com.spring.entity.Item;
 import com.spring.exception.Item_NotFound_Exception;
 import com.spring.service.Item_Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/litas")
@@ -24,8 +30,8 @@ public class ItemController {
     }
 
     @GetMapping("/items")
-    public ResponseEntity<Iterable<Item>> getAllItems(){
-        Iterable<Item> list = this.item_service.listItems();
+    public ResponseEntity<Iterable<Item>> getAllItems(Pageable pageable){
+        Iterable<Item> list = this.item_service.listItems(pageable);
         return new ResponseEntity<Iterable<Item>>(list, HttpStatus.OK);
     }
 
@@ -39,4 +45,15 @@ public class ItemController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Item Not Found");
         }
     }
+
+    @RequestMapping(value = "/category/{cid}/item", method = RequestMethod.POST)
+//    @RequestMapping(value = "/items", method = RequestMethod.POST)
+    private ResponseEntity<Item> createItem(HttpServletRequest request,@PathVariable(value="cid") Long cid,
+                                          @RequestBody Item item){
+        item.setCategory_id(cid);
+        Item i = this.item_service.createItem(item);
+        return new ResponseEntity<Item>(i,HttpStatus.OK);
+    }
+
+
 }

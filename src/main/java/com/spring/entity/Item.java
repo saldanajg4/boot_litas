@@ -14,7 +14,7 @@ import java.util.Optional;
 //@Data
 //@EqualsAndHashCode(exclude="customer_orders")
 @Entity
-public class Item {
+public class Item extends AuditModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="item_id")
@@ -29,39 +29,40 @@ public class Item {
     @Column(name="price", nullable = false)
     private double price;
 
+    @Column(name="category_id",nullable = false)
+    private Long category_id;
+
     @JsonIgnore
     @ManyToMany
     private List<Item> customer_orders = new ArrayList<Item>();
 
     public Item(){super();}
-//    public Item(long id){
-//        this.item_id = id;
-//    }
 
-//    @OneToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(unique = false)
-//    private Category category;
-    private String category;
-
-//    @OneToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(unique = false)
-//    private Section section;
     private String section;
 
-    public Item( String name, String desc, double price, String cat, String section){
+    public Item( String name, String desc, double price, Long cat, String section){
 
         this.item_name = name;
         this.description = desc;
         this.price = price;
-        this.category = cat;
+        this.category_id = cat;
         this.section = section;
     }
-    public Item( String name, String desc, double price, String cat){
+
+    public Long getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(Long category_id) {
+        this.category_id = category_id;
+    }
+
+    public Item(String name, String desc, double price, Long cat){
 
         this.item_name = name;
         this.description = desc;
         this.price = price;
-        this.category = cat;
+        this.category_id = cat;
     }
 
     public String getSection() {
@@ -72,13 +73,7 @@ public class Item {
         this.section = section;
     }
 
-    public String getCategory() {
-        return category;
-    }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public List<Item> getCustomer_orders() {
         return customer_orders;

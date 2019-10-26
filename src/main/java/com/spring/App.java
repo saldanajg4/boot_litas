@@ -4,16 +4,14 @@ import com.spring.entity.Category;
 import com.spring.entity.Customer_Order;
 import com.spring.entity.Item;
 import com.spring.entity.Section;
-import com.spring.service.Category_Repository;
-import com.spring.service.Item_Repository;
-import com.spring.service.Order_Repository;
-import com.spring.service.Section_Repository;
+import com.spring.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,6 +25,7 @@ import java.util.*;
 //@EnableAutoConfiguration
 //@ComponentScan
 @SpringBootApplication
+@EnableJpaAuditing
 public class App 
 {
     private static final Logger log = LoggerFactory.getLogger(App.class);
@@ -36,28 +35,31 @@ public class App
         SpringApplication.run(App.class,args);
     }
     @Bean
-    public CommandLineRunner demo(final Order_Repository repository, final Item_Repository item_repository, final Section_Repository section_repository, Category_Repository category_repository){
+    public CommandLineRunner demo(final Order_Repository repository, final Item_Repository item_repository,
+                                  final Section_Repository section_repository, Category_Repository category_repository,
+                                  final Ingredient_Repository ingredient_repository){
 
             return (args) -> {
                 section_repository.save(new Section(1L,"kitchen"));
                 section_repository.save(new Section(2L,"Bar"));
-
-                category_repository.save(new Category(1L,"postres"));
-                category_repository.save(new Category(2L,"bebidas"));
-                category_repository.save(new Category(3L,"salsas"));
-                category_repository.save(new Category(4L,"sandwiches"));
-                category_repository.save(new Category(5L,"antojitos"));
-                category_repository.save(new Category(6L,"caldos"));
-                Category cat = category_repository.findById(1L).get();
+                Category cat = new Category();
+                cat.setCategory_name("postres");
+                category_repository.save(cat);
+                category_repository.save(new Category("bebidas"));
+                category_repository.save(new Category("salsas"));
+                category_repository.save(new Category("sandwiches"));
+                category_repository.save(new Category("antojitos"));
+                category_repository.save(new Category("caldos"));
+//                Category_DTO cat = category_repository.findById(1L).get();
                 Section sec = section_repository.findById(2L).get();
 //            Item( String name, String desc, double price, Customer_Order customer_order){
 
-                item_repository.save(new Item("choco flan", "flan con pastel de chocolate", 3.00, "postres", "bar"));
-                item_repository.save(new Item("Tacos", "Tortilla hecha a mano con opcion de carnes", 2.00, "antojitos","kitchen"));
-                item_repository.save(new Item("Agua Fresca Gde.", "pura fruta natural", 3.00, "bebidas", "bar"));
-                item_repository.save(new Item("pozole", "verde hecho a base de verduras frescas y mole verde, servido con taquitos dorados de papa", 10.00, "caldos","kitchen"));
-                item_repository.save(new Item("huarache", "made out of fresh corn dough filled with your choice of meat or vegetables", 8.50, "antojitos","kitchen"));
-                item_repository.save(new Item("quesadilla", "made out of fresh corn dough folded with your choice of meat or vegetables", 9.50, "antojitos","kitchen"));
+//                item_repository.save(new Item("choco flan", "flan con pastel de chocolate", 3.00, "postres", "bar"));
+//                item_repository.save(new Item("Tacos", "Tortilla hecha a mano con opcion de carnes", 2.00, "antojitos","kitchen"));
+//                item_repository.save(new Item("Agua Fresca Gde.", "pura fruta natural", 3.00, "bebidas", "bar"));
+//                item_repository.save(new Item("pozole", "verde hecho a base de verduras frescas y mole verde, servido con taquitos dorados de papa", 10.00, "caldos","kitchen"));
+//                item_repository.save(new Item("huarache", "made out of fresh corn dough filled with your choice of meat or vegetables", 8.50, "antojitos","kitchen"));
+//                item_repository.save(new Item("quesadilla", "made out of fresh corn dough folded with your choice of meat or vegetables", 9.50, "antojitos","kitchen"));
 
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date date = new Date();

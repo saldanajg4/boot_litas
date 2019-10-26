@@ -5,4 +5,5 @@ import com.spring.entity.Customer_Order;
 public interface Order_Service {
     Iterable<Customer_Order> listOrders();
     Customer_Order getOrder(long id);
+    Customer_Order saveOrder(Customer_Order order);
 }

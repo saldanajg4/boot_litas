@@ -39,5 +39,10 @@ public class Order_Service_Impl implements Order_Service {
         }
     }
 
+    @Override
+    public Customer_Order saveOrder(Customer_Order order) {
+        return this.order_repository.save(order);
+    }
+
 
 }
