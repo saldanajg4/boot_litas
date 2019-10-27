@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "e8770421-a5dd-4079-8712-7efb08d70181",
+		"name": "litas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/litas/category/5/item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n\t\"item_name\":\"huarache\"\t,\r\n\t\"description\":\"topped with your choic of meat or veggies\",\r\n\t\"price\":9.5\r\n\t\r\n\t\r\n\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/litas/category/5/item",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"litas",
+						"category",
+						"5",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/litas/item/2/ingredients",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n\t\"name\":\"aguacate\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/litas/item/2/ingredients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"litas",
+						"item",
+						"2",
+						"ingredients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/litas/category/1/item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n\t\"item_name\":\"choco flan\"\t,\r\n\t\"description\":\"flan con pastel de chocolate\",\r\n\t\"price\":3\r\n\t\r\n\t\r\n\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/litas/category/1/item",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"litas",
+						"category",
+						"1",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/litas/category/5/item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n\t\"item_name\":\"huarache\"\t,\r\n\t\"description\":\"topped with your choic of meat or veggies\",\r\n\t\"price\":9.5\r\n\t\r\n\t\r\n\t\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/litas/category/5/item",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"litas",
+						"category",
+						"5",
+						"item"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/litas/item/2/ingredients",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n\t\"name\":\"crema\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/litas/item/2/ingredients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"litas",
+						"item",
+						"2",
+						"ingredients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/litas/item/2/ingredients",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n\t\"name\":\"aguacate\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/litas/item/2/ingredients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"litas",
+						"item",
+						"2",
+						"ingredients"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
