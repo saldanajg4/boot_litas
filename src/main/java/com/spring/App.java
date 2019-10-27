@@ -1,9 +1,6 @@
 package com.spring;
 
-import com.spring.entity.Category;
-import com.spring.entity.Customer_Order;
-import com.spring.entity.Item;
-import com.spring.entity.Section;
+import com.spring.entity.*;
 import com.spring.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +47,110 @@ public class App
                 category_repository.save(new Category("sandwiches"));
                 category_repository.save(new Category("antojitos"));
                 category_repository.save(new Category("caldos"));
-//                Category_DTO cat = category_repository.findById(1L).get();
-                Section sec = section_repository.findById(2L).get();
+
+                ingredient_repository.save(new Ingredient("crema"));
+                ingredient_repository.save(new Ingredient("fajita"));
+                ingredient_repository.save(new Ingredient("lechuga"));
+                ingredient_repository.save(new Ingredient("chicharron"));
+                ingredient_repository.save(new Ingredient("pollo"));
+                ingredient_repository.save(new Ingredient("aguacate"));
+                ingredient_repository.save(new Ingredient("queso"));
+                ingredient_repository.save(new Ingredient("guacamole"));
+                ingredient_repository.save(new Ingredient("cebolla"));
+
+//                Section sec = section_repository.findById(2L).get();
+
+//                flan item
+                Item item = new Item();
+                item.setItem_name("chocoflan");
+                item.setDescription("pastel de choco");
+                item.setPrice(3.00);
+                item.setCategory_id(1L);
+                item.setSection(Section_Enum.BAR.toString());
+
+//                this is only needed for OneToMany
+//                Ingredient ingredient1 = new Ingredient();
+//                ingredient1.setName("whip cream");
+//                ingredient1.setItem(item);
+//
+//                Ingredient ingredient2 = new Ingredient();
+//                ingredient2.setName("honey");
+//                ingredient2.setItem(item);
+//
+//                //add ingredients to item
+//                item.getIngredientSet().add(ingredient1);
+//                item.getIngredientSet().add(ingredient2);
+                item.setIngredientSet(this.getIngredients(ingredient_repository,1,3));//this item will have
+                                                                            //crema, fajita, lechuga
+
+                //save item
+                item_repository.save(item);
+
+//                huarache item
+                item = new Item();
+                item.setItem_name("huarache");
+                item.setDescription("made out of fresh corn dough filled with your choice of meat or vegetables");
+                item.setPrice(10.00);
+                item.setCategory_id(5L);
+                item.setSection(Section_Enum.KITCHEN.toString());
+
+//                ingredient1 = new Ingredient();
+//                ingredient1.setName("lechuga");
+//                ingredient1.setItem(item);
+//
+//                ingredient2 = new Ingredient();
+//                ingredient2.setName("aguacate");
+//                ingredient2.setItem(item);
+//
+//                //add ingredients to item
+//                item.getIngredientSet().add(ingredient1);
+//                item.getIngredientSet().add(ingredient2);
+                //add section to item
+                item.setIngredientSet(this.getIngredients(ingredient_repository,3,5));//this item will have
+                                                        //pollo, aguacate, queso
+                //save item
+                item_repository.save(item);
+
+                //tostada regia
+                item = new Item();
+                item.setItem_name("Tostada Regia");
+                item.setDescription("made out of fresh corn deep fried tortilla");
+                item.setPrice(10.00);
+                item.setCategory_id(5L);
+                item.setSection(Section_Enum.KITCHEN.toString());
+
+//                ingredient1 = new Ingredient();
+//                ingredient1.setName("guacamole");
+//                ingredient1.setItem(item);
+//
+//                ingredient2 = new Ingredient();
+//                ingredient2.setName("pollo");
+//                ingredient2.setItem(item);
+//
+//                //add ingredients to item
+//                item.getIngredientSet().add(ingredient1);
+//                item.getIngredientSet().add(ingredient2);
+
+                item.setIngredientSet(this.getIngredients(ingredient_repository,2,7));//this item will have
+
+                item_repository.save(item);
+
+
+//                Quesadilla
+                item = new Item();
+                item.setItem_name("Quesadilla");
+                item.setDescription("made out of fresh corn tortilla");
+                item.setPrice(10.00);
+                item.setCategory_id(5L);
+                item.setSection(Section_Enum.KITCHEN.toString());
+
+                item.setIngredientSet(this.getIngredients(ingredient_repository,4,9));//this item will have
+                item_repository.save(item);
+
+
+
+
+
 //            Item( String name, String desc, double price, Customer_Order customer_order){
 
 //                item_repository.save(new Item("choco flan", "flan con pastel de chocolate", 3.00, "postres", "bar"));
@@ -85,13 +184,13 @@ public class App
 //            item2.setDescription("made out of fresh corn dough folded with your choice of meat or vegetables");
 //            item2.setPrice(9.50);
 
-                Set<Item> itemList = getItems(item_repository, 1, 5);
+                Set<Item> itemList = getItems(item_repository, 1, 3);
 
                 order.setItemList(itemList);
                 order.setTotal(itemList);
                 repository.save(order);
 
-                itemList = getItems(item_repository, 2, 6);
+                itemList = getItems(item_repository, 2, 3);
                 order2.setItemList(itemList);
                 order2.setTotal(itemList);
                 repository.save(order2);
@@ -119,6 +218,16 @@ public class App
                 itemList.add(item.get());
         }
         return itemList;
+    }
+
+    private Set<Ingredient> getIngredients(Ingredient_Repository ingredient_repository,int from, int to) {
+        Set<Ingredient> IngredientList = new HashSet<Ingredient>();
+        for(long i = from ; i <=to; i++){
+            Optional<Ingredient> item =ingredient_repository.findById(i);
+            if(item.isPresent())
+                IngredientList.add(item.get());
+        }
+        return IngredientList;
     }
 
 

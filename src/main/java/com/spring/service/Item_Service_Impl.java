@@ -19,8 +19,8 @@ public class Item_Service_Impl implements Item_Service {
     }
 
     @Override
-    public Iterable<Item> listItems(Pageable pageable) {
-        return this.item_repository.findAll(pageable);
+    public Iterable<Item> listItems() {
+        return this.item_repository.findAll();
     }
 
 

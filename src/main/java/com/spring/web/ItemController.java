@@ -30,8 +30,8 @@ public class ItemController {
     }
 
     @GetMapping("/items")
-    public ResponseEntity<Iterable<Item>> getAllItems(Pageable pageable){
-        Iterable<Item> list = this.item_service.listItems(pageable);
+    public ResponseEntity<Iterable<Item>> getAllItems(){
+        Iterable<Item> list = this.item_service.listItems();
         return new ResponseEntity<Iterable<Item>>(list, HttpStatus.OK);
     }
 

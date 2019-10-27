@@ -1,5 +1,7 @@
 package com.spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,9 +13,6 @@ public class Section {
 
     @Column(name="section_name", nullable = false)
     private String section_name;
-
-//    @OneToOne(mappedBy = "section")
-//    private Item item;
 
     public Section(){}
 

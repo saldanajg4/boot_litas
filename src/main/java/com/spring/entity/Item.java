@@ -9,12 +9,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.*;
 
 
 //@Data
 //@EqualsAndHashCode(exclude="customer_orders")
 @Entity
-public class Item extends AuditModel{
+//public class Item extends AuditModel{
+public class Item{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="item_id")
@@ -36,6 +39,17 @@ public class Item extends AuditModel{
     @ManyToMany
     private List<Item> customer_orders = new ArrayList<Item>();
 
+//    @OneToMany(cascade = CascadeType.ALL,
+//    fetch=FetchType.LAZY,
+//    mappedBy = "item")
+//    private Set<Ingredient> ingredientSet = new HashSet<Ingredient>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="item_ingredients",
+            joinColumns = @JoinColumn(name="item_id", referencedColumnName = "item_id"),
+            inverseJoinColumns = @JoinColumn(name="ingredient_id", referencedColumnName = "ingredient_id"))
+    private Set<Ingredient> ingredientSet;
+
     public Item(){super();}
 
     private String section;
@@ -47,6 +61,14 @@ public class Item extends AuditModel{
         this.price = price;
         this.category_id = cat;
         this.section = section;
+    }
+
+    public Set<Ingredient> getIngredientSet() {
+        return ingredientSet;
+    }
+
+    public void setIngredientSet(Set<Ingredient> ingredientSet) {
+        this.ingredientSet = ingredientSet;
     }
 
     public Long getCategory_id() {

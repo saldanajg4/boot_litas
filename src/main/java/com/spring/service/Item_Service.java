@@ -5,6 +5,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface Item_Service {
     Item createItem(Item item);
-    Iterable<Item> listItems(Pageable pageable);
+    Iterable<Item> listItems();
     Item getItem(long id);
 }

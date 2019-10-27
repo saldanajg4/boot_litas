@@ -35,14 +35,15 @@ public class IngredientController {
         return new ResponseEntity<Ingredient>(ing, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/item/{itemid}/ingredients", method = RequestMethod.POST)
-    private ResponseEntity<Ingredient> createIngredient(@PathVariable (value="itemid") Long itemid,
-                                            @Valid @RequestBody Ingredient ingredient){
-        Item item = this.item_service.getItem(itemid);
-        ingredient.setItem(item);
-        Ingredient ing = this.ingredient_Service.saveIngredient(ingredient);
-        return new ResponseEntity<Ingredient>(ing,HttpStatus.OK);
-    }
+    //this method for OneToMany relationship
+//    @RequestMapping(value = "/item/{itemid}/ingredients", method = RequestMethod.POST)
+//    private ResponseEntity<Ingredient> createIngredient(@PathVariable (value="itemid") Long itemid,
+//                                            @Valid @RequestBody Ingredient ingredient){
+//        Item item = this.item_service.getItem(itemid);
+//        ingredient.setItem(item);
+//        Ingredient ing = this.ingredient_Service.saveIngredient(ingredient);
+//        return new ResponseEntity<Ingredient>(ing,HttpStatus.OK);
+//    }
 
 
     @GetMapping("/ingredients")
