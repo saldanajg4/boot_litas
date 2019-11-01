@@ -11,17 +11,19 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-//public class Ingredient extends AuditModel {
-public class Ingredient {
+public class Ingredient extends AuditModel {
+//public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="ingredient_id", nullable = false)
     private Long ingredient_id;
 
-    private String name;
+    @Column(name="ingredient_name", nullable = false)
+    private String ingredient_name;
 
     public Ingredient(){}
     public Ingredient(String ing){
-        this.name = ing;
+        this.ingredient_name = ing;
     }
 
 //    @JsonIgnore
@@ -49,12 +51,11 @@ public class Ingredient {
         this.ingredientSet = ingredientSet;
     }
 
-
-    public String getName() {
-        return name;
+    public String getIngredient_name() {
+        return ingredient_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIngredient_name(String ingredient_name) {
+        this.ingredient_name = ingredient_name;
     }
 }

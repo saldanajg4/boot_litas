@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 public class Section {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="section_id")
     private Long section_id;
 
@@ -18,6 +18,9 @@ public class Section {
 
     public Section(Long id,String name){
         this.section_id = id;
+        this.section_name = name;
+    }
+    public Section(String name){
         this.section_name = name;
     }
 

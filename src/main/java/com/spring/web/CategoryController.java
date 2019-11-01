@@ -23,18 +23,18 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/category", method = RequestMethod.POST)
-    public ResponseEntity<Category> saveCategory(Category cat){
+    public ResponseEntity<Category> saveCategory(@RequestBody Category cat){
         Category c = this.category_service.saveCategory(cat);
         return new ResponseEntity<Category>(c, HttpStatus.OK);
     }
 
-    @GetMapping("/cat")
+    @GetMapping("/categories")
     public ResponseEntity<Iterable<Category>> getAllCategories(){
         Iterable<Category> list = this.category_service.listCategories();
         return new ResponseEntity<Iterable<Category>>(list,HttpStatus.OK);
     }
 
-    @GetMapping("/cat/{id}")
+    @GetMapping("/categories/{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable("id") int id){
         Category cat = this.category_service.getCategory(id);
         return new ResponseEntity<Category>(cat, HttpStatus.OK);

@@ -2,6 +2,7 @@ package com.spring.web;
 
 import com.spring.entity.Ingredient;
 import com.spring.entity.Item;
+import com.spring.service.Ingredient_Repository;
 import com.spring.service.Ingredient_Service;
 import com.spring.service.Item_Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,12 @@ public class IngredientController {
 
     private Ingredient_Service ingredient_Service;
     private Item_Service item_service;
+    private Ingredient_Repository ingredient_repository;
+
+    @Autowired
+    public void setIngredient_repository(Ingredient_Repository ingredient_repository) {
+        this.ingredient_repository = ingredient_repository;
+    }
 
     @Autowired
     public void setItem_service(Item_Service item_service){
@@ -30,7 +37,7 @@ public class IngredientController {
     }
 
     @RequestMapping(value = "/ingredient", method = RequestMethod.POST)
-    public ResponseEntity<Ingredient> saveIngredient(Ingredient ingredient){
+    public ResponseEntity<Ingredient> saveIngredient(@RequestBody Ingredient ingredient){
         Ingredient ing = this.ingredient_Service.saveIngredient(ingredient);
         return new ResponseEntity<Ingredient>(ing, HttpStatus.OK);
     }
@@ -52,10 +59,24 @@ public class IngredientController {
         return new ResponseEntity<Iterable<Ingredient>>(list,HttpStatus.OK);
     }
 
-    @GetMapping("/ingredient/{id}")
+    @GetMapping("/ingredients/{id}")
     public ResponseEntity<Ingredient> getIngredientById(@PathVariable("id")Long id){
         Ingredient ing = this.ingredient_Service.getIngredientById(id);
         return new ResponseEntity<Ingredient>(ing,HttpStatus.OK);
+    }
+
+    @PutMapping("/updateIngredient")
+//    public Ingredient updateIngredient(@RequestBody Ingredient newIngredient, @PathVariable ("id") Long id){
+    public Ingredient updateIngredient(@RequestBody Ingredient newIngredient){
+        return this.ingredient_repository.findById(newIngredient.getIngredient_id())
+                .map(ingredient -> {
+                    ingredient.setIngredient_name(newIngredient.getIngredient_name());
+                    return this.ingredient_repository.save(ingredient);
+                })
+                .orElseGet(() -> {
+                    newIngredient.setIngredient_id(newIngredient.getIngredient_id());
+                    return this.ingredient_repository.save(newIngredient);
+                });
     }
 
 }

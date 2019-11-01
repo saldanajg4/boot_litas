@@ -37,8 +37,8 @@ public class App
                                   final Ingredient_Repository ingredient_repository){
 
             return (args) -> {
-                section_repository.save(new Section(1L,"kitchen"));
-                section_repository.save(new Section(2L,"Bar"));
+                section_repository.save(new Section("kitchen"));
+                section_repository.save(new Section("Bar"));
                 Category cat = new Category();
                 cat.setCategory_name("postres");
                 category_repository.save(cat);
@@ -65,9 +65,8 @@ public class App
                 item.setItem_name("chocoflan");
                 item.setDescription("pastel de choco");
                 item.setPrice(3.00);
-                item.setCategory_id(1L);
-                item.setSection(Section_Enum.BAR.toString());
-
+                item.setSectionObject(section_repository.findById(2L).get());
+                item.setCategoryObject(category_repository.findById(1L).get());
 //                this is only needed for OneToMany
 //                Ingredient ingredient1 = new Ingredient();
 //                ingredient1.setName("whip cream");
@@ -91,9 +90,8 @@ public class App
                 item.setItem_name("huarache");
                 item.setDescription("made out of fresh corn dough filled with your choice of meat or vegetables");
                 item.setPrice(10.00);
-                item.setCategory_id(5L);
-                item.setSection(Section_Enum.KITCHEN.toString());
-
+                item.setSectionObject(section_repository.findById(1L).get());
+                item.setCategoryObject(category_repository.findById(5L).get());
 //                ingredient1 = new Ingredient();
 //                ingredient1.setName("lechuga");
 //                ingredient1.setItem(item);
@@ -116,9 +114,8 @@ public class App
                 item.setItem_name("Tostada Regia");
                 item.setDescription("made out of fresh corn deep fried tortilla");
                 item.setPrice(10.00);
-                item.setCategory_id(5L);
-                item.setSection(Section_Enum.KITCHEN.toString());
-
+                item.setSectionObject(section_repository.findById(1L).get());
+                item.setCategoryObject(category_repository.findById(5L).get());
 //                ingredient1 = new Ingredient();
 //                ingredient1.setName("guacamole");
 //                ingredient1.setItem(item);
@@ -141,8 +138,8 @@ public class App
                 item.setItem_name("Quesadilla");
                 item.setDescription("made out of fresh corn tortilla");
                 item.setPrice(10.00);
-                item.setCategory_id(5L);
-                item.setSection(Section_Enum.KITCHEN.toString());
+                item.setSectionObject(section_repository.findById(1L).get());
+                item.setCategoryObject(category_repository.findById(5L).get());
 
                 item.setIngredientSet(this.getIngredients(ingredient_repository,4,9));//this item will have
                 item_repository.save(item);

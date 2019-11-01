@@ -32,8 +32,8 @@ public class Item{
     @Column(name="price", nullable = false)
     private double price;
 
-    @Column(name="category_id",nullable = false)
-    private Long category_id;
+//    @Column(name="category_id",nullable = false)
+//    private Long category_id;
 
     @JsonIgnore
     @ManyToMany
@@ -50,17 +50,47 @@ public class Item{
             inverseJoinColumns = @JoinColumn(name="ingredient_id", referencedColumnName = "ingredient_id"))
     private Set<Ingredient> ingredientSet;
 
+    @OneToOne
+    @JoinColumn(name="section_id")
+    private Section sectionObject;
+
+    @OneToOne
+    @JoinColumn(name="category_id")
+    private Category categoryObject;
+
     public Item(){super();}
 
-    private String section;
 
-    public Item( String name, String desc, double price, Long cat, String section){
+//    public Item( String name, String desc, double price, Long cat, String section){
+public Item( String name, String desc, double price){
 
         this.item_name = name;
         this.description = desc;
         this.price = price;
-        this.category_id = cat;
-        this.section = section;
+    }
+
+    public Category getCategoryObject() {
+        return categoryObject;
+    }
+
+    public void setCategoryObject(Category categoryObject) {
+        this.categoryObject = categoryObject;
+    }
+
+    public Section getSectionObject() {
+        return sectionObject;
+    }
+
+    public void setSectionObject(Section sectionObject) {
+        this.sectionObject = sectionObject;
+    }
+
+    public Long getItem_id() {
+        return item_id;
+    }
+
+    public void setItem_id(Long item_id) {
+        this.item_id = item_id;
     }
 
     public Set<Ingredient> getIngredientSet() {
@@ -71,31 +101,13 @@ public class Item{
         this.ingredientSet = ingredientSet;
     }
 
-    public Long getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(Long category_id) {
-        this.category_id = category_id;
-    }
-
+//    public Item(String name, String desc, double price, Long cat){
     public Item(String name, String desc, double price, Long cat){
-
         this.item_name = name;
         this.description = desc;
         this.price = price;
-        this.category_id = cat;
+//        this.category_id = cat;
     }
-
-    public String getSection() {
-        return section;
-    }
-
-    public void setSection(String section) {
-        this.section = section;
-    }
-
-
 
     public List<Item> getCustomer_orders() {
         return customer_orders;

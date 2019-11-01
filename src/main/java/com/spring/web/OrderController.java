@@ -29,7 +29,7 @@ public class OrderController {
         return new ResponseEntity<Iterable<Customer_Order>>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/order/{id}")
+    @GetMapping("/orders/{id}")
     public ResponseEntity<Customer_Order> getCustomer_Order(@PathVariable("id") long id){
         try {
             Customer_Order customer_order = this.order_service.getOrder(id);
